@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/jourdan/VScodeProjects_c/ece551",
+      "program": "/Users/jourdan/VScodeProjects_c/ece551/build/Debug/outDebug"
+    }
+  ]
+}
