@@ -1,0 +1,28 @@
+11111 22222
+aaa11 bbbb1
+aaaaa bbbbb
+!!!!! @@@@@
+!!!ab !!!ab
+11111 11111
+aaaaa aaaaa
+12345 12345
+a b
+1234& &1234
+11111 111111
+a a a
+aaaaa bbbbb1
+aaaa bbbbb
+
+aaaaaa dddddd
+aaabb aaabbb
+aaabb bbbaa
+12333 33321
+11345 12341
+1 2
+1
+11123 11223
+12345 qwert
+11234 aasdf
+aaaa aaaa
+12345 1234
+abcdA abcde
