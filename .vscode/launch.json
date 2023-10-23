@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/jourdan/VScodeProjects_c/ece551",
-      "program": "/Users/jourdan/VScodeProjects_c/ece551/build/Debug/outDebug"
+      "cwd": "/Users/jourdan/VScodeProjects_c/ece551/060_eval2",
+      "program": "/Users/jourdan/VScodeProjects_c/ece551/060_eval2/build/Debug/outDebug"
     }
   ]
 }
