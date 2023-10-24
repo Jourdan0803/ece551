@@ -4,5 +4,7 @@
 #include "provided.h"
 
 //any functions you want your main to use
-
+void parseFile(char * file);
+char * makeString(char * start, char * end);
+catarray_t * catClassifier(char *file);
 #endif
