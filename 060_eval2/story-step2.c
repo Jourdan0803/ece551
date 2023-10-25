@@ -12,4 +12,5 @@ int main(int argc, char ** argv) {
   catarray_t * ans = catClassifier(argv[1]);
   printWords(ans);
   freeCatArray(ans);
+  return 0;
 }

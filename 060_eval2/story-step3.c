@@ -11,5 +11,6 @@ int main(int argc, char ** argv) {
   }
   catarray_t * cats = catClassifier(argv[1]);
   parseFile(argv[2], cats, 0);
+  freeCatArray(cats);
   return 0;
 }
