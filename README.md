@@ -24,16 +24,12 @@ During my academic tenure, I've tackled a multitude of problems ranging from fun
 
 ## List of Homeworks 📂
 
-1. **Data Structures**
+1. **C++ Programming**
     - Description: Implemented various data structures from scratch.
     - [Link to Homework](#)
 
 2. **Machine Learning**
     - Description: Explored different machine learning models using Python.
-    - [Link to Homework](#)
-
-3. **Digital Signal Processing**
-    - Description: Analyzed and processed signals using MATLAB.
     - [Link to Homework](#)
 
 ... (Add as many homeworks as you have)
