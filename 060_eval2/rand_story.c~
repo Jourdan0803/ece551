@@ -1,0 +1,33 @@
+#include "rand_story.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void parseFile(const char * file) {
+  FILE * f = fopen(file, "r");
+  if (f == NULL) {
+    fprintf(stderr, "Error opening file");
+    exit(EXIT_FAILURE);
+  }
+
+  char * line = NULL;
+  size_t sz = 0;
+
+  while ((getline(&line, &sz, f)) >= 0) {
+    char * start = NULL;
+    char * end = NULL;
+    while ((start = strchr(line, '_'))) {
+      end = strchr(start + 1, '_');
+      if (end == NULL) {
+        fprintf(stderr, "No end underscore found\n");
+        exit(EXIT_FAILURE);
+      }
+      *start = '\0';
+      *end = '\0';
+      printf("%s%s", line, chooseWord(start + 1, NULL));
+      line = end + 1;
+    }
+    printf("%s", line);
+  }
+}

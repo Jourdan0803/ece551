@@ -4,5 +4,5 @@
 #include "provided.h"
 
 //any functions you want your main to use
-
+void parseFile(const char * file);
 #endif

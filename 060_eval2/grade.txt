@@ -1,0 +1,272 @@
+Grading at 10/24/2023:22:07:32.591522
+For commit ID a603b24f960ac87ee1ec6325f515e54b7fc82517
+Grading at Tue Oct 24 06:07:28 PM EDT 2023
+Doing some basic checking for your submission
+
+Step 1
+Checking that story-step1 compiles
+rm -f *~ story-step2  story-step1 story-step3 story-step4 story-step2.o story-step1.o story-step3.o story-step4.o rand_story.o
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c rand_story.c
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step1.c
+gcc -o story-step1 story-step1.o rand_story.o provided.o
+rm story-step1.o
+The code compiled (good)
+Executable story-step1 exists (good)
+Checking with provided test case story.txt
+Your file matched the expected output
+Now running YOUR tests for step 1
+
+1.1: Current test is story-step1 story.txt
+-----------------------------
+Your output looks good. Lets check valgrind
+Valgrind reported errors or memory leaks:
+==2368977== Memcheck, a memory error detector
+==2368977== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2368977== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2368977== Command: ./story-step1 story.txt
+==2368977== Parent PID: 2368976
+==2368977== 
+==2368977== 
+==2368977== HEAP SUMMARY:
+==2368977==     in use at exit: 712 bytes in 3 blocks
+==2368977==   total heap usage: 13 allocs, 10 frees, 9,108 bytes allocated
+==2368977== 
+==2368977== 240 bytes in 2 blocks are definitely lost in loss record 1 of 2
+==2368977==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2368977==    by 0x48E4122: getdelim (iogetdelim.c:62)
+==2368977==    by 0x10986A: parseFile (rand_story.c:51)
+==2368977==    by 0x1093AB: main (story-step1.c:11)
+==2368977== 
+==2368977== LEAK SUMMARY:
+==2368977==    definitely lost: 240 bytes in 2 blocks
+==2368977==    indirectly lost: 0 bytes in 0 blocks
+==2368977==      possibly lost: 0 bytes in 0 blocks
+==2368977==    still reachable: 472 bytes in 1 blocks
+==2368977==         suppressed: 0 bytes in 0 blocks
+==2368977== Reachable blocks (those to which a pointer was found) are not shown.
+==2368977== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2368977== 
+==2368977== For lists of detected and suppressed errors, rerun with: -s
+==2368977== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+Step 2
+Checking that story-step2 compiles
+rm -f *~ story-step2  story-step1 story-step3 story-step4 story-step2.o story-step1.o story-step3.o story-step4.o rand_story.o
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c rand_story.c
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step2.c
+gcc -o story-step2 story-step2.o rand_story.o provided.o
+rm story-step2.o
+The code compiled (good)
+Executable story-step2 exists (good)
+Now running YOUR tests for step 2
+
+2.1: Current test is story-step2 words.txt
+-----------------------------
+Your output looks good. Lets check valgrind
+Valgrind reported errors or memory leaks:
+==2369020== Memcheck, a memory error detector
+==2369020== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2369020== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2369020== Command: ./story-step2 words.txt
+==2369020== Parent PID: 2369019
+==2369020== 
+==2369020== 
+==2369020== HEAP SUMMARY:
+==2369020==     in use at exit: 1,359 bytes in 14 blocks
+==2369020==   total heap usage: 26 allocs, 12 frees, 9,791 bytes allocated
+==2369020== 
+==2369020== 23 bytes in 3 blocks are definitely lost in loss record 1 of 4
+==2369020==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369020==    by 0x490C58E: strdup (strdup.c:42)
+==2369020==    by 0x109C3A: catClassifier (rand_story.c:134)
+==2369020==    by 0x1093A1: main (story-step2.c:12)
+==2369020== 
+==2369020== 24 bytes in 3 blocks are definitely lost in loss record 2 of 4
+==2369020==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369020==    by 0x490C58E: strdup (strdup.c:42)
+==2369020==    by 0x109C64: catClassifier (rand_story.c:137)
+==2369020==    by 0x1093A1: main (story-step2.c:12)
+==2369020== 
+==2369020== 840 bytes in 7 blocks are definitely lost in loss record 4 of 4
+==2369020==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369020==    by 0x48E4122: getdelim (iogetdelim.c:62)
+==2369020==    by 0x109CDF: catClassifier (rand_story.c:109)
+==2369020==    by 0x1093A1: main (story-step2.c:12)
+==2369020== 
+==2369020== LEAK SUMMARY:
+==2369020==    definitely lost: 887 bytes in 13 blocks
+==2369020==    indirectly lost: 0 bytes in 0 blocks
+==2369020==      possibly lost: 0 bytes in 0 blocks
+==2369020==    still reachable: 472 bytes in 1 blocks
+==2369020==         suppressed: 0 bytes in 0 blocks
+==2369020== Reachable blocks (those to which a pointer was found) are not shown.
+==2369020== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2369020== 
+==2369020== For lists of detected and suppressed errors, rerun with: -s
+==2369020== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+
+Step 3
+Checking that story-step3 compiles
+rm -f *~ story-step2  story-step1 story-step3 story-step4 story-step2.o story-step1.o story-step3.o story-step4.o rand_story.o
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c rand_story.c
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step3.c
+gcc -o story-step3 story-step3.o rand_story.o provided.o
+rm story-step3.o
+The code compiled (good)
+Executable story-step3 exists (good)
+Now running YOUR tests for step 3
+
+3.1: Current test is story-step3 words.txt story2.txt
+-----------------------------
+Your output looks good. Lets check valgrind
+Valgrind reported errors or memory leaks:
+==2369093== Memcheck, a memory error detector
+==2369093== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2369093== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2369093== Command: ./story-step3 words.txt story2.txt
+==2369093== Parent PID: 2369092
+==2369093== 
+==2369093== 
+==2369093== HEAP SUMMARY:
+==2369093==     in use at exit: 2,207 bytes in 22 blocks
+==2369093==   total heap usage: 50 allocs, 28 frees, 15,080 bytes allocated
+==2369093== 
+==2369093== 240 bytes in 2 blocks are definitely lost in loss record 6 of 11
+==2369093==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369093==    by 0x48E4122: getdelim (iogetdelim.c:62)
+==2369093==    by 0x109883: parseFile (rand_story.c:51)
+==2369093==    by 0x1093C4: main (story-step3.c:13)
+==2369093== 
+==2369093== 480 bytes in 4 blocks are definitely lost in loss record 10 of 11
+==2369093==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369093==    by 0x48E4122: getdelim (iogetdelim.c:62)
+==2369093==    by 0x109CE6: catClassifier (rand_story.c:109)
+==2369093==    by 0x1093A1: main (story-step3.c:12)
+==2369093== 
+==2369093== 543 (16 direct, 527 indirect) bytes in 1 blocks are definitely lost in loss record 11 of 11
+==2369093==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369093==    by 0x1099B8: catClassifier (rand_story.c:103)
+==2369093==    by 0x1093A1: main (story-step3.c:12)
+==2369093== 
+==2369093== LEAK SUMMARY:
+==2369093==    definitely lost: 736 bytes in 7 blocks
+==2369093==    indirectly lost: 527 bytes in 13 blocks
+==2369093==      possibly lost: 0 bytes in 0 blocks
+==2369093==    still reachable: 944 bytes in 2 blocks
+==2369093==         suppressed: 0 bytes in 0 blocks
+==2369093== Reachable blocks (those to which a pointer was found) are not shown.
+==2369093== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2369093== 
+==2369093== For lists of detected and suppressed errors, rerun with: -s
+==2369093== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+
+Step 4
+Checking that story-step4 compiles
+rm -f *~ story-step2  story-step1 story-step3 story-step4 story-step2.o story-step1.o story-step3.o story-step4.o rand_story.o
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c rand_story.c
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step4.c
+gcc -o story-step4 story-step4.o rand_story.o provided.o
+rm story-step4.o
+The code compiled (good)
+Executable story-step4 exists (good)
+Now running YOUR tests for step 4
+
+4.1: Current test is story-step4 words.txt story2.txt
+-----------------------------
+Your output looks good. Lets check valgrind
+Valgrind reported errors or memory leaks:
+==2369128== Memcheck, a memory error detector
+==2369128== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2369128== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2369128== Command: ./story-step4 words.txt story2.txt
+==2369128== Parent PID: 2369127
+==2369128== 
+==2369128== 
+==2369128== HEAP SUMMARY:
+==2369128==     in use at exit: 2,207 bytes in 22 blocks
+==2369128==   total heap usage: 50 allocs, 28 frees, 15,080 bytes allocated
+==2369128== 
+==2369128== 240 bytes in 2 blocks are definitely lost in loss record 6 of 11
+==2369128==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369128==    by 0x48E4122: getdelim (iogetdelim.c:62)
+==2369128==    by 0x1098E8: parseFile (rand_story.c:51)
+==2369128==    by 0x1093FA: main (story-step4.c:16)
+==2369128== 
+==2369128== 480 bytes in 4 blocks are definitely lost in loss record 10 of 11
+==2369128==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369128==    by 0x48E4122: getdelim (iogetdelim.c:62)
+==2369128==    by 0x109D4B: catClassifier (rand_story.c:109)
+==2369128==    by 0x1093D7: main (story-step4.c:15)
+==2369128== 
+==2369128== 543 (16 direct, 527 indirect) bytes in 1 blocks are definitely lost in loss record 11 of 11
+==2369128==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369128==    by 0x109A1D: catClassifier (rand_story.c:103)
+==2369128==    by 0x1093D7: main (story-step4.c:15)
+==2369128== 
+==2369128== LEAK SUMMARY:
+==2369128==    definitely lost: 736 bytes in 7 blocks
+==2369128==    indirectly lost: 527 bytes in 13 blocks
+==2369128==      possibly lost: 0 bytes in 0 blocks
+==2369128==    still reachable: 944 bytes in 2 blocks
+==2369128==         suppressed: 0 bytes in 0 blocks
+==2369128== Reachable blocks (those to which a pointer was found) are not shown.
+==2369128== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2369128== 
+==2369128== For lists of detected and suppressed errors, rerun with: -s
+==2369128== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+
+4.2: Current test is story-step4 -n words.txt story2.txt
+-----------------------------
+Your output looks good. Lets check valgrind
+Valgrind reported errors or memory leaks:
+==2369156== Memcheck, a memory error detector
+==2369156== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2369156== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2369156== Command: ./story-step4 -n words.txt story2.txt
+==2369156== Parent PID: 2369155
+==2369156== 
+==2369156== 
+==2369156== HEAP SUMMARY:
+==2369156==     in use at exit: 2,207 bytes in 22 blocks
+==2369156==   total heap usage: 50 allocs, 28 frees, 15,072 bytes allocated
+==2369156== 
+==2369156== 10 bytes in 1 blocks are definitely lost in loss record 2 of 12
+==2369156==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369156==    by 0x490C58E: strdup (strdup.c:42)
+==2369156==    by 0x109CD0: catClassifier (rand_story.c:137)
+==2369156==    by 0x109399: main (story-step4.c:10)
+==2369156== 
+==2369156== 240 bytes in 2 blocks are definitely lost in loss record 7 of 12
+==2369156==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369156==    by 0x48E4122: getdelim (iogetdelim.c:62)
+==2369156==    by 0x1098E8: parseFile (rand_story.c:51)
+==2369156==    by 0x1093BC: main (story-step4.c:11)
+==2369156== 
+==2369156== 480 bytes in 4 blocks are definitely lost in loss record 11 of 12
+==2369156==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369156==    by 0x48E4122: getdelim (iogetdelim.c:62)
+==2369156==    by 0x109D4B: catClassifier (rand_story.c:109)
+==2369156==    by 0x109399: main (story-step4.c:10)
+==2369156== 
+==2369156== 533 (16 direct, 517 indirect) bytes in 1 blocks are definitely lost in loss record 12 of 12
+==2369156==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2369156==    by 0x109A1D: catClassifier (rand_story.c:103)
+==2369156==    by 0x109399: main (story-step4.c:10)
+==2369156== 
+==2369156== LEAK SUMMARY:
+==2369156==    definitely lost: 746 bytes in 8 blocks
+==2369156==    indirectly lost: 517 bytes in 12 blocks
+==2369156==      possibly lost: 0 bytes in 0 blocks
+==2369156==    still reachable: 944 bytes in 2 blocks
+==2369156==         suppressed: 0 bytes in 0 blocks
+==2369156== Reachable blocks (those to which a pointer was found) are not shown.
+==2369156== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==2369156== 
+==2369156== For lists of detected and suppressed errors, rerun with: -s
+==2369156== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+
+You have NOT passed your test cases!
+You should go and figure out/understand where thing went wrong
+And fix the problem(s) before the deadline
+
+Overall Grade: NO GRADE YET
