@@ -96,7 +96,9 @@ void parseFile(const char * file, catarray_t * cats, int noreuse) {
   free(used->words);
   free(used);
   free(line);
-  fclose(f);
+  if (fclose(f) != 0) {
+    exit(EXIT_FAILURE);
+  }
 }
 
 //function to strip \n
@@ -160,7 +162,9 @@ catarray_t * catClassifier(char * file) {
     free(temp);
   }
   free(line);
-  fclose(f);
+  if (fclose(f) != 0) {
+    exit(EXIT_FAILURE);
+  }
   return ans;
 }
 

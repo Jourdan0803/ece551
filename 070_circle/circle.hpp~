@@ -1,0 +1,22 @@
+#ifndef CIRCLE_HPP
+#define CIRCLE_HPP
+
+#include "point.hpp"
+
+class Circle {
+ private:
+  Point center;
+  const double radius;
+
+ public:
+  // Constructor
+  Circle(const Point & p, double r);
+
+  // Move method
+  void move(double dx, double dy);
+
+  // Intersection area method
+  double intersectionArea(const Circle & otherCircle);
+};
+
+#endif  // CIRCLE_HPP

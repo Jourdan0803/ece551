@@ -1,0 +1,11 @@
+#include "point.hpp"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <cmath>
+
+void Point::move(double dx, double dy) {
+  x += dx;
+  y += dy;
+}

@@ -1,0 +1,19 @@
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <vector>
+
+int main(int argc, char ** argv) {
+  std::ifstream read;
+  std::string strings;
+  std::vector<std::string> ans;
+  if (argc == 1) {
+    while (!std::cin.eof()) {
+      std::getline(std::cin, strings);
+      ans.push_back(strings);
+      std::sort(ans.begin(), ans.end());
+      printfuc(ans);
+      ans.clear();
+    }
+  }
+}

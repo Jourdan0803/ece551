@@ -1,0 +1,47 @@
+Grading at 11/01/2023:20:23:07.398077
+For commit ID 4db7570beeb1b804dd5b189ef2a9f8613d07c841
+Grading at Wed Nov  1 04:22:51 PM EDT 2023
+Attempting to compile:
+rm -f *.o  *~ intMatrixTest
+#################################################
+testcase1:
+Your output is correct
+valgrind was clean
+#################################################
+testcase2:
+Your output is correct
+valgrind was clean
+#################################################
+testcase3:
+Your output is correct
+valgrind was clean
+#################################################
+testcase4:
+Your output is correct
+valgrind was clean
+#################################################
+testcase5:
+Your output is correct
+valgrind was clean
+#################################################
+testcase6:
+Your output is correct
+valgrind was clean
+#################################################
+testcase7:
+Your output is correct
+valgrind was clean
+#################################################
+testcase8:
+Your output is correct
+valgrind was clean
+#################################################
+testcase9:
+Your output is correct
+valgrind was clean
+#################################################
+testcase10:
+Your output is correct
+valgrind was clean
+
+Overall Grade: A
