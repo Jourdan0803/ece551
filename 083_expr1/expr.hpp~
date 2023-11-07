@@ -1,0 +1,19 @@
+#ifndef __EXPR_H___
+#define __EXPR_H___
+#include <cstdio>
+#include <cstdlib>
+#include <sstream>
+#include <string>
+
+class Expression {
+ public:
+  virtual std::string toString() const = 0;
+};
+
+class NumExpression : public Expression {
+ private:
+  long number;
+
+ public:
+  NumExpression(long n) : number(n) { std::string toString() const }
+};
