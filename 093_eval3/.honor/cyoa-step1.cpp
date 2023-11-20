@@ -1,5 +1,6 @@
 #include <iostream>
-#include "Story.hpp"  // Make sure to include the header file for your Story class
+#include "Story.hpp"
+#include <string>
 
 int main(int argc, char **argv) {
     if (argc != 2) {
