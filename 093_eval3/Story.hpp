@@ -6,6 +6,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <set>
+#include <map>
 
 #include "Page.hpp"  // Include your Page classes
 
@@ -22,6 +24,10 @@ class Story {
 
   void loadStory(const std::string & directory);
   void displayStory() const;
+  void verifyPage() const;
+  size_t getNextPage(size_t currentPageNum, size_t choiceNum) const;
+  void displayUserInput(std::map<std::string, long int>& pathVars);
+  void findWinningPaths(size_t currentPage, std::vector<std::pair<size_t,size_t> >& path, std::set<size_t>& visited) const;
 };
 
 #endif

@@ -1,11 +1,11 @@
-Grading at 11/20/2023:03:08:19.749281
-For commit ID ef0a1a6a1c3a53294d55c02843f4b7406f5ecf10
-Grading at Sun Nov 19 10:08:18 PM EST 2023
+Grading at 11/26/2023:17:15:53.882720
+For commit ID d7ea7725fffa8076340ee959b5b87388839a2484
+Grading at Sun Nov 26 12:15:33 PM EST 2023
 Doing some basic checking for your submission
 
 Step 1
 Checking that cyoa-step1 compiles
-rm -f cyoa-step1 cyoa-step1.o Story.o Page.o
+rm -f cyoa-step1 cyoa-step2 Story.o Page.o cyoa-step1.o cyoa-step2.o
 g++ -Wall -Wextra -std=c++98 -c cyoa-step1.cpp
 g++ -Wall -Wextra -std=c++98 -c Story.cpp
 g++ -Wall -Wextra -std=c++98 -c Page.cpp
@@ -19,7 +19,162 @@ No request to check for intermediate deadline completion on step 1
 
 Step 2
 Checking that cyoa-step2 compiles
-rm -f cyoa-step1 cyoa-step1.o Story.o Page.o
+rm -f cyoa-step1 cyoa-step2 Story.o Page.o cyoa-step1.o cyoa-step2.o
+g++ -Wall -Wextra -std=c++98 -c cyoa-step2.cpp
+g++ -Wall -Wextra -std=c++98 -c Story.cpp
+g++ -Wall -Wextra -std=c++98 -c Page.cpp
+g++ -Wall -Wextra -std=c++98 -o cyoa-step2 cyoa-step2.o Story.o Page.o
+The code compiled (good)
+Executable cyoa-step2 exists (good)
+------------------------------------
+Now running YOUR tests for step 2
+------------------------------------
+------------------------------------
+You have requested that we check for intermediate deadline completion on step 2
+------------------------------------
+
+Step 2 EC intermediate deadline test 1
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input0.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 2
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input10.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 3
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input11.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 4
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input12.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 5
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input1.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 6
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input2.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 7
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input3.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 8
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input4.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 9
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input5.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 10
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input6.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 11
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input7.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 12
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input8.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 13
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story1 < /usr/local/ece551/cyoa/story1/inputs/input9.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 14
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story2 < /usr/local/ece551/cyoa/story2/inputs/input0.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 15
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story2 < /usr/local/ece551/cyoa/story2/inputs/input1.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 16
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story2 < /usr/local/ece551/cyoa/story2/inputs/input2.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 17
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story2 < /usr/local/ece551/cyoa/story2/inputs/input3.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 18
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story2 < /usr/local/ece551/cyoa/story2/inputs/input4.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 19
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story2 < /usr/local/ece551/cyoa/story2/inputs/input5.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 20
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story2 < /usr/local/ece551/cyoa/story2/inputs/input6.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 21
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story2 < /usr/local/ece551/cyoa/story2/inputs/input7.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 22
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story2 < /usr/local/ece551/cyoa/story2/inputs/input8.txt
+Valgrind was clean for this testcase
+You have passed this test case
+
+Step 2 EC intermediate deadline test 23
+===========================================================
+./cyoa-step2 /usr/local/ece551/cyoa/story2 < /usr/local/ece551/cyoa/story2/inputs/input9.txt
+Valgrind was clean for this testcase
+You have passed this test case
+Intermediate deadline requirements for Step 2 passed at Sun Nov 26 12:15:53 PM EST 2023
+
+Step 3
+Checking that cyoa-step3 compiles
+rm -f cyoa-step1 cyoa-step2 Story.o Page.o cyoa-step1.o cyoa-step2.o
 The code did not compile!
 
 Overall Grade: NO GRADE YET
