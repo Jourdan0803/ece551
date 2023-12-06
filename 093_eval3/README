@@ -395,7 +395,7 @@ if a condition is met.  For example:
 8:15:Ask the dragon if he has heard any good jokes lately.
 
 The above 4 lines indicate 4 choices on page 8.  The last works
-just as it alwvays has, but the first three specify a condition based
+just as it always has, but the first three specify a condition based
 on the value of the 'pastry' variable.  For whichever choice(s)
 have their conditions met, those conditions are displayed normally.
 For any condition that is not met, instead of printing its text, print <UNAVAILABLE>.

@@ -8,12 +8,18 @@ int main(int argc, char ** argv) {
     std::cerr << "Usage: " << argv[0] << " <story_directory>" << std::endl;
     return 1;
   }
+
   std::string directory = argv[1];
   Story story;
   story.loadStory(directory);
   story.verifyPage();
-  std::map<std::string, long int> pathVars = std::map<std::string, long int>();
-  story.displayUserInput(pathVars);
+  story.displayUserInput();
+  std::vector<std::pair<size_t, size_t> > path;
+  std::set<size_t> visited;
+  findWinningPaths(0, path, visited);
 
+  if (path.empty()) {
+    std::cout << "This story is unwinnable!" << std::endl;
+  }
   return 0;
 }

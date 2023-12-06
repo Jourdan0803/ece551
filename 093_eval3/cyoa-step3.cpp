@@ -13,13 +13,13 @@ int main(int argc, char ** argv) {
   Story story;
   story.loadStory(directory);
   story.verifyPage();
-  story.displayUserInput();
-    std::vector<std::pair<size_t,size_t> > path;
-    std::set<size_t> visited;
-    findWinningPaths(0, path, visited);
+  std::vector<std::pair<size_t, size_t> > path;
+  std::set<size_t> visited;
+  size_t pathNum = 0;
+  story.findWinningPaths(0, pathNum, path, visited);
 
-    if (path.empty()) {
-        std::cout << "This story is unwinnable!" << std::endl;
-    }
+  if (pathNum == 0) {
+    std::cout << "This story is unwinnable!" << std::endl;
+  }
   return 0;
 }

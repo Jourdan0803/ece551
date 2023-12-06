@@ -12,7 +12,8 @@ int main(int argc, char ** argv) {
   Story story;
   story.loadStory(directory);
   story.verifyPage();
-  std::map<std::string, long int> pathVars = std::map<std::string, long int>();
+  std::cout << "start" << std::endl;
+  std::map<std::string, long int> pathVars;
   story.displayUserInput(pathVars);
 
   return 0;

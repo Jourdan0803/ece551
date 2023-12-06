@@ -13,6 +13,7 @@ int main(int argc, char ** argv) {
   Story story;
   story.loadStory(directory);
   story.verifyPage();
-  story.displayUserInput();
+  std::map<std::string, long int> pathVars;
+  story.displayUserInput(pathVars);
   return 0;
 }

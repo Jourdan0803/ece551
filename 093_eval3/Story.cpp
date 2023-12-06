@@ -7,8 +7,9 @@
 #include <fstream>
 #include <iostream>
 #include <limits>
-#include <sstream>
+#include <map>
 #include <set>
+#include <sstream>
 
 Story::Story() {
 }
@@ -39,7 +40,7 @@ Story & Story::operator=(const Story & rhs) {
   }
   return *this;
 }
-
+/***************************************** step1 ****************************************/
 void Story::loadStory(const std::string & directory) {
   std::ifstream storyFile((directory + "/story.txt").c_str());
   std::string line;
@@ -81,57 +82,60 @@ void Story::loadStory(const std::string & directory) {
         std::cerr << "Page appears not in right order " << std::endl;
         exit(EXIT_FAILURE);
       }
-    }else if(line.find('$') != std::string::npos){
+    }
+    else if (line.find('$') != std::string::npos) {
       // step 4: Process pagenum$var=value
       std::string variable;
       long int value;
       iss >> pageNum >> dummyString;
-      getline(iss, variable,'=');
+      getline(iss, variable, '=');
       iss >> value;
-      if (pageNum < pages.size()){
+      if (pageNum < pages.size()) {
         Npage * npage = dynamic_cast<Npage *>(pages[pageNum]);
-        npage->pageVariables[variable]=value;
-      }else {
+        npage->pageVariables[variable] = value;
+      }
+      else {
         std::cerr << "Page not being declared" << std::endl;
         exit(EXIT_FAILURE);
-        }
+      }
     }
     else if (line.find(':') != std::string::npos) {
       // Process choice line 2:1:Something and pagenum[var=value]:dest:text
       size_t destPage;
       std::string choiceText;
       // step 4: pagenum[var=value]:dest:text
-      
-      if(line.find('[') != std::string::npos){
+
+      if (line.find('[') != std::string::npos) {
         std::string variable;
         long int value;
-        char equal;
         char colon;
-        iss >> pageNum >> dummyString; 
-        getline(iss, variable,'=');
+        iss >> pageNum >> dummyString;
+        getline(iss, variable, '=');
         iss >> value >> dummyString >> colon >> destPage >> colon;
         getline(iss, choiceText);
         if (pageNum < pages.size()) {
-        Npage * npage = dynamic_cast<Npage *>(pages[pageNum]);
+          Npage * npage = dynamic_cast<Npage *>(pages[pageNum]);
           npage->addVariable(variable, value);
           npage->addChoice(destPage, choiceText);
-      }else {
-        std::cerr << "Page not being declared" << std::endl;
-        exit(EXIT_FAILURE);
         }
-      }else{
+        else {
+          std::cerr << "Page not being declared" << std::endl;
+          exit(EXIT_FAILURE);
+        }
+      }
+      else {
         iss >> pageNum >> dummyString >> destPage >> dummyString;
         getline(iss, choiceText);
         if (pageNum < pages.size()) {
-        Npage * npage = dynamic_cast<Npage *>(pages[pageNum]);
-        npage->addChoice(destPage, choiceText);
+          Npage * npage = dynamic_cast<Npage *>(pages[pageNum]);
+          npage->addChoice(destPage, choiceText);
+        }
+        else {
+          std::cerr << "Page not being declared" << std::endl;
+          exit(EXIT_FAILURE);
+        }
       }
-      else {
-        std::cerr << "Page not being declared" << std::endl;
-        exit(EXIT_FAILURE);
-      }
-      }
-    } 
+    }
   }
 }
 
@@ -142,6 +146,8 @@ void Story::displayStory() const {
     pages[i]->displayPage();
   }
 }
+
+/*********************************** step2 ***************************************/
 void Story::verifyPage() const {
   // verify existance of win and lose page
   bool WpageExist = false;
@@ -189,51 +195,50 @@ size_t Story::getNextPage(size_t currentPageNum, size_t choiceNum) const {
   const Npage * npage = dynamic_cast<const Npage *>(pages[currentPageNum]);
   const std::vector<std::pair<size_t, std::string> > & choices = npage->getChoices();
   if (choiceNum > 0 && choiceNum <= choices.size()) {
-    if(choices[choiceNum - 1].second =="<UNAVAILABLE>"){
-      std::cout << "That choice is not available at this time, please try again" << std::endl;
+    if (choices[choiceNum - 1].second == "<UNAVAILABLE>") {
+      std::cout << "That choice is not available at this time, please try again"
+                << std::endl;
       return std::numeric_limits<size_t>::max();
-    }else{
+    }
+    else {
       return choices[choiceNum - 1].first;
     }
-    
   }
   else {
     std::cout << "That is not a valid choice, please try again" << std::endl;
     return std::numeric_limits<size_t>::max();
-    ;
   }
 }
-
-void addCondition(std::map<std::string, long int>& vars,
-                  std::map<std::string, long int>& pathVars) {
-    for (std::map<std::string, long int>::iterator it = vars.begin(); it != vars.end(); ++it) {
-        std::map<std::string, long int>::iterator pathIt = pathVars.find(it->first);
-        if (pathIt != pathVars.end()) {
-            // The element is found in pathVars, update its value
-            pathIt->second = it->second;
-        } else {
-            // The element is not found in pathVars, insert the new element
-            pathVars.insert(std::make_pair(it->first, it->second));
-        }
+void addCondition(std::map<std::string, long int> & vars,
+                  std::map<std::string, long int> & pathVars) {
+  for (std::map<std::string, long int>::iterator it = vars.begin(); it != vars.end();
+       ++it) {
+    std::map<std::string, long int>::iterator pathIt = pathVars.find(it->first);
+    if (pathIt != pathVars.end()) {
+      // The element is found in pathVars, update its value
+      pathIt->second = it->second;
     }
+    else {
+      // The element is not found in pathVars, insert the new element
+      pathVars.insert(std::make_pair(it->first, it->second));
+    }
+  }
 }
-
-void Story::displayUserInput(std::map<std::string, long int>& pathVars) {
+void Story::displayUserInput(std::map<std::string, long int> & pathVars) {
   size_t currentPage = 0;
   bool flag = true;
   while (flag) {
-    if (pages[currentPage]->getType()=='N') {
-      Npage* npage = dynamic_cast<Npage*>(pages[currentPage]);
-        // Method to update variables in the page
+    if (pages[currentPage]->getType() == 'N') {
+      Npage * npage = dynamic_cast<Npage *>(pages[currentPage]);
+      // Method to update variables in the page
       npage->updateVariables(pathVars);
       addCondition(npage->pageVariables, pathVars);
-      
     }
     pages[currentPage]->displayPage();  // 4a. Display the current page
     if (pages[currentPage]->getType() == 'W' || pages[currentPage]->getType() == 'L') {
       flag = false;
       continue;
-    } 
+    }
     std::string input;
     size_t choice;
     while (true) {
@@ -253,36 +258,38 @@ void Story::displayUserInput(std::map<std::string, long int>& pathVars) {
     }
   }
 }
-/*********************** step3 ******************************/
+/*************************************** step3 *********************************************/
 
-void Story::findWinningPaths(size_t currentPage, std::vector<std::pair<size_t,size_t> >& path, std::set<size_t>& visited) const {
+void Story::findWinningPaths(size_t currentPage,
+                             size_t & allPath,
+                             std::vector<std::pair<size_t, size_t> > & path,
+                             std::set<size_t> & visited) const {
   if (pages[currentPage]->getType() == 'W') {
     // Print the winning path
     for (size_t i = 0; i < path.size(); ++i) {
-        std::cout << path[i].first << "(" << path[i].second << "),";
+      std::cout << path[i].first << "(" << path[i].second << "),";
     }
     std::cout << currentPage << "(win)" << std::endl;
+    allPath++;
     return;
   }
   if (pages[currentPage]->getType() == 'L') {
     return;
   }
 
-    visited.insert(currentPage); // Mark the current page as visited
+  visited.insert(currentPage);  // Mark the current page as visited
 
   if (pages[currentPage]->getType() == 'N') {
-      const Npage* npage = dynamic_cast<const Npage*>(pages[currentPage]);
-      const std::vector<std::pair<size_t, std::string> >& choices = npage->getChoices();
-      for (size_t i = 0; i < choices.size(); ++i) {
-          size_t nextPage = choices[i].first;
-          if (visited.find(nextPage) == visited.end()) { // Check if current page in visited
-              path.push_back(std::make_pair(currentPage, nextPage)); // Add current page to the path
-              findWinningPaths(nextPage, path, visited); // Recursive call
-          }
+    const Npage * npage = dynamic_cast<const Npage *>(pages[currentPage]);
+    const std::vector<std::pair<size_t, std::string> > & choices = npage->getChoices();
+    for (size_t i = 0; i < choices.size(); ++i) {
+      size_t nextPage = choices[i].first;
+      if (visited.find(nextPage) == visited.end()) {  // Check if current page in visited
+        path.push_back(
+            std::make_pair(currentPage, i + 1));  // Add current page to the path
+        findWinningPaths(nextPage, allPath, path, visited);  // Recursive call
+        path.pop_back();
       }
+    }
   }
-  visited.erase(currentPage);
-  path.pop_back(); // Backtrack
 }
-
-

@@ -3,9 +3,9 @@
 #define _PAGE_HPP_
 
 #include <iostream>
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 class Page {
  protected:
@@ -24,21 +24,21 @@ class Page {
 
 class Npage : public Page {
   std::vector<std::pair<size_t, std::string> > choices;
-  
 
  public:
   std::map<std::string, long int> pageVariables;
-  std::vector<std::pair<std::string, long int> > conditions; 
+  std::vector<std::pair<std::string, long int> > conditions;
   Npage(size_t num, std::string t);
   void addChoice(size_t destPage, const std::string & choiceText);
-  void addVariable(const std::string & variable,size_t value);
+  void addVariable(const std::string & variable, size_t value);
   virtual Npage * clone() const;
   virtual void displayPage() const;
   virtual char getType() const;
   virtual size_t getPageNum() const;
   const std::vector<std::pair<size_t, std::string> > & getChoices() const;
-  bool isConditionMet(const std::pair<std::string, long int> & condition, const std::map<std::string, long int>& vars);
-  void updateVariables(const std::map<std::string, long int>& vars);
+  bool isConditionMet(const std::pair<std::string, long int> & condition,
+                      const std::map<std::string, long int> & vars);
+  void updateVariables(const std::map<std::string, long int> & vars);
 };
 
 class Wpage : public Page {
