@@ -13,6 +13,7 @@
 
 Story::Story() {
 }
+
 // Destructor
 Story::~Story() {
   for (size_t i = 0; i < pages.size(); i++) {
@@ -40,7 +41,9 @@ Story & Story::operator=(const Story & rhs) {
   }
   return *this;
 }
-/***************************************** step1 ****************************************/
+
+/******************************************** step1 *******************************************/
+
 void Story::loadStory(const std::string & directory) {
   std::ifstream storyFile((directory + "/story.txt").c_str());
   std::string line;
@@ -49,21 +52,28 @@ void Story::loadStory(const std::string & directory) {
     std::cerr << "Failed to open story.txt in " << directory << std::endl;
     exit(EXIT_FAILURE);
   }
-
   while (getline(storyFile, line)) {
     std::istringstream iss(line);
+    std::string pageNumStr;
     size_t pageNum;
-    char dummyString;
+    char dummyChar;
     std::string filename;
     //check if type is number@type:filename(0@N:page0.txt)
     if (line.find('@') != std::string::npos) {
       char type;
-      iss >> pageNum >> dummyString >> type >> dummyString >> filename;
+      getline(iss, pageNumStr, '@');
+      std::istringstream pageNumStream(pageNumStr);
+      // **error check** Page numbers must be valid integers fit into a size_t
+      if (!(pageNumStream >> pageNum) || !(pageNumStream.eof())) {
+        std::cerr << "Invalid page number: " << pageNumStr << std::endl;
+        exit(EXIT_FAILURE);
+      }
+      iss >> type >> dummyChar >> filename;
       std::ifstream pageFile((directory + "/" + filename).c_str());
       std::string pageText;
       std::getline(pageFile, pageText, '\0');
-
-      if (pageNum == pages.size()) {
+      if (pageNum ==
+          pages.size()) {  // **error check** Page declarations must appear in order.
         Page * newPage;
         switch (type) {
           case 'N':
@@ -87,9 +97,16 @@ void Story::loadStory(const std::string & directory) {
       // step 4: Process pagenum$var=value
       std::string variable;
       long int value;
-      iss >> pageNum >> dummyString;
+      getline(iss, pageNumStr, '$');
+      std::istringstream pageNumStream(pageNumStr);
+      // **error check** Page numbers must be valid integers fit into a size_t
+      if (!(pageNumStream >> pageNum) || !(pageNumStream.eof())) {
+        std::cerr << "Invalid page number: " << pageNumStr << std::endl;
+        exit(EXIT_FAILURE);
+      }
       getline(iss, variable, '=');
       iss >> value;
+      // **error check** A page declaration must appear before anything else related to that page
       if (pageNum < pages.size()) {
         Npage * npage = dynamic_cast<Npage *>(pages[pageNum]);
         npage->pageVariables[variable] = value;
@@ -103,36 +120,77 @@ void Story::loadStory(const std::string & directory) {
       // Process choice line 2:1:Something and pagenum[var=value]:dest:text
       size_t destPage;
       std::string choiceText;
+      std::string destStr;
       // step 4: pagenum[var=value]:dest:text
 
       if (line.find('[') != std::string::npos) {
         std::string variable;
         long int value;
         char colon;
-        iss >> pageNum >> dummyString;
+        getline(iss, pageNumStr, '[');
+        std::istringstream pageNumStream(pageNumStr);
+        // **error check** Page numbers must be valid integers fit into a size_t
+        if (!(pageNumStream >> pageNum) || !(pageNumStream.eof())) {
+          std::cerr << "Invalid page number: " << pageNumStr << std::endl;
+          exit(EXIT_FAILURE);
+        }
+        // **error check** A page declaration must appear before anything else related to that page
+        if (pageNum >= pages.size()) {
+          std::cerr << "Page not being declared" << std::endl;
+          exit(EXIT_FAILURE);
+        }
+        // **error check** Win and Lose pages MUST NOT have any choices.
+        if (pages[pageNum]->getType() == 'W' || pages[pageNum]->getType() == 'L') {
+          std::cerr << "Win and Lose pages MUST NOT have any choices." << std::endl;
+          exit(EXIT_FAILURE);
+        }
         getline(iss, variable, '=');
-        iss >> value >> dummyString >> colon >> destPage >> colon;
+        iss >> value >> dummyChar >> colon;
+        getline(iss, destStr, ':');
+        std::istringstream destStrStream(destStr);
+        // **error check** Page numbers must be valid integers fit into a size_t
+        if (!(destStrStream >> destPage) || !(destStrStream.eof())) {
+          std::cerr << "Invalid page number: " << destStr << std::endl;
+          exit(EXIT_FAILURE);
+        }
         getline(iss, choiceText);
         if (pageNum < pages.size()) {
           Npage * npage = dynamic_cast<Npage *>(pages[pageNum]);
           npage->addVariable(variable, value);
           npage->addChoice(destPage, choiceText);
         }
-        else {
+      }
+      else {
+        // step2: Process choice line 2:1:Something
+        getline(iss, pageNumStr, ':');
+        std::istringstream pageNumStream(pageNumStr);
+        // **error check** Page numbers must be valid integers fit into a size_t
+        if (!(pageNumStream >> pageNum) || !(pageNumStream.eof())) {
+          std::cerr << "Invalid page number: " << pageNumStr << std::endl;
+          exit(EXIT_FAILURE);
+        }
+        getline(iss, destStr, ':');
+        std::istringstream destStrStream(destStr);
+        // **error check** Page numbers must be valid integers fit into a size_t
+        if (!(destStrStream >> destPage) || !(destStrStream.eof())) {
+          std::cerr << "Invalid page number: " << destStr << std::endl;
+          exit(EXIT_FAILURE);
+        }
+        if (pageNum >= pages.size()) {
           std::cerr << "Page not being declared" << std::endl;
           exit(EXIT_FAILURE);
         }
-      }
-      else {
-        iss >> pageNum >> dummyString >> destPage >> dummyString;
+        // **error check** Win and Lose pages MUST NOT have any choices.
+        if (pages[pageNum]->getType() == 'W' || pages[pageNum]->getType() == 'L') {
+          std::cerr << "Win and Lose pages MUST NOT have any choices." << std::endl;
+          exit(EXIT_FAILURE);
+        }
         getline(iss, choiceText);
+        // **error check** A page declaration must appear before anything else related to that page
         if (pageNum < pages.size()) {
           Npage * npage = dynamic_cast<Npage *>(pages[pageNum]);
           npage->addChoice(destPage, choiceText);
-        }
-        else {
-          std::cerr << "Page not being declared" << std::endl;
-          exit(EXIT_FAILURE);
+          npage->addVariable("", 0);
         }
       }
     }
@@ -147,7 +205,8 @@ void Story::displayStory() const {
   }
 }
 
-/*********************************** step2 ***************************************/
+/********************************************* step2 ***********************************************/
+
 void Story::verifyPage() const {
   // verify existance of win and lose page
   bool WpageExist = false;
@@ -173,12 +232,12 @@ void Story::verifyPage() const {
       const std::vector<std::pair<size_t, std::string> > & choice_i =
           dynamic_cast<const Npage *>(pages[i])->getChoices();
       for (size_t j = 0; j < choice_i.size(); j++) {
-        //1.verify all referenced pages exist
+        // 1.verify all referenced pages exist
         if (choice_i[j].first >= pages.size()) {
           std::cerr << "all referenced pages must be existed" << std::endl;
           exit(EXIT_FAILURE);
         }
-        //2.change the pages with reference by choices with true;
+        // 2.change the pages with reference by choices with true;
         reference[choice_i[j].first] = true;
       }
     }
@@ -244,7 +303,8 @@ void Story::displayUserInput(std::map<std::string, long int> & pathVars) {
     while (true) {
       getline(std::cin, input);
       std::stringstream ss(input);
-      if (ss >> choice) {
+      ss >> choice;
+      if (!ss.fail() && ss.eof()) {
         size_t nextpage =
             getNextPage(currentPage, choice);  // 4d. Navigate to the chosen page
         if (nextpage != std::numeric_limits<size_t>::max()) {
@@ -258,7 +318,8 @@ void Story::displayUserInput(std::map<std::string, long int> & pathVars) {
     }
   }
 }
-/*************************************** step3 *********************************************/
+
+/********************************************* step3 ************************************************/
 
 void Story::findWinningPaths(size_t currentPage,
                              size_t & allPath,

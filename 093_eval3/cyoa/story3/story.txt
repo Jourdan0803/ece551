@@ -1,5 +1,6 @@
 0@N:start.txt
-0:1:Purchase a chocolate croissant.
+
+1:1:Purchase a chocolate croissant.
 0:2:Purchase an eclair.
 0:3:Purchase a muffin.
 1@N:croissant.txt
@@ -32,9 +33,9 @@
 8[pastry=3]:14:Throw the muffin at the dragon's nose and run for it!
 8:15:Ask the dragon if he has heard any good jokes lately.
 9@L:dragonsnack.txt
-10@W:coins.txt
+10@L:coins.txt
 11@L:attack.txt
-12@W:offercroissant.txt
+12@L:offercroissant.txt
 13@N:squirteclair.txt
 13[broke=0]:16:Fling your last coins at the dragon
 13[sword=1]:17:Attack the dragon with your sword
@@ -46,9 +47,9 @@
 15:21:What do you call it when you see the same ghost twice?
 15:22:Knock knock.
 16@L:threwcoins.txt
-17@W:attackblind.txt
+17@L:attackblind.txt
 18@L:runcoins.txt
-19@W:runbroke.txt
+19@L:runbroke.txt
 20@L:lgn.txt
-21@W:dejaboo.txt
+21@L:dejaboo.txt
 22@W:knock.txt

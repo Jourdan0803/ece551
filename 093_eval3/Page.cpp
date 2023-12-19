@@ -51,7 +51,7 @@ void Npage::addVariable(const std::string & variable, size_t value) {
 //check if the condition meet the user choice
 bool Npage::isConditionMet(const std::pair<std::string, long int> & condition,
                            const std::map<std::string, long int> & vars) {
-  if (condition.first.empty()) {
+  if (condition.first.empty() || condition.first == "") {
     return true;
   }
   else {
